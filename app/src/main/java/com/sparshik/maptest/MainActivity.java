@@ -1,9 +1,12 @@
 package com.sparshik.maptest;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -134,4 +137,34 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     {
         m_map.moveCamera(CameraUpdateFactory.newCameraPosition(target));
     }
+
+
+    /**
+     * Override onOptionsItemSelected to use main_menu instead of BaseActivity menu
+     *
+     * @param menu
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        /* Inflate the menu; this adds items to the action bar if it is present. */
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    /**
+     * Override onOptionsItemSelected to add action_settings only to the MainActivity
+     *
+     * @param item
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_trail) {
+            startActivity(new Intent(MainActivity.this, GrandCanyon.class));
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
 }
